@@ -44,8 +44,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Agent.cs" />
+    <Compile Include="CellularSensor.cs" />
+    <Compile Include="CompanyCommander.cs" />
+    <Compile Include="InvestigationManager.cs" />
+    <Compile Include="JuniorAgent.cs" />
+    <Compile Include="MotionSensor.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SeniorAgent.cs" />
+    <Compile Include="Sensor.cs" />
+    <Compile Include="SquadLeader.cs" />
+    <Compile Include="ThermalSensor.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
