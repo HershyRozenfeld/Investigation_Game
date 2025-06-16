@@ -6,10 +6,7 @@ using System.Threading.Tasks;
 
 namespace Investigation_Game
 {
-    internal class Agent
+    internal class CellularSensor
     {
-        int Id { get; set; }
-        string Name { get; set; }
-        
     }
 }
