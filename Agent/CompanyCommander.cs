@@ -8,7 +8,7 @@ namespace Investigation_Game
 {
     internal class CompanyCommander : Agent
     {
-        public CompanyCommander(Sensor[] weaknesses) : base(weaknesses)
+        public CompanyCommander(string[] weaknesses) : base(weaknesses)
         {
             Name = "CompanyCommander";
         }

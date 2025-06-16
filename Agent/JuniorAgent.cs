@@ -8,7 +8,7 @@ namespace Investigation_Game
 {
     public class JuniorAgent : Agent
     {
-        public JuniorAgent(Sensor[] weaknesses) : base(weaknesses)
+        public JuniorAgent(string[] weaknesses) : base(weaknesses)
         {
             Name = "JuniorAgent";
         }
