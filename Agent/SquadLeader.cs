@@ -6,7 +6,11 @@ using System.Threading.Tasks;
 
 namespace Investigation_Game
 {
-    internal class SquadLeader
+    internal class SquadLeader : Agent
     {
+        public SquadLeader(string name, Sensor[] weaknesses) : base(name, weaknesses)
+        {
+
+        }
     }
 }
