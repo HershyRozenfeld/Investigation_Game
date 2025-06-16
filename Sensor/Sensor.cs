@@ -6,9 +6,23 @@ using System.Threading.Tasks;
 
 namespace Investigation_Game
 {
-    public class Sensor
+    public abstract class Sensor
     {
-    
+        public string Name { get; protected set; }
+        public Sensor()
+        {
+        }
+
+        public bool Activate(Agent agent)
+        {
+            if (agent.DictOfWeaknesses.ContainsKey(Name))
+            {
+                return true;
+            }
+            return false;
+        }
+
+
     }
 
 }
