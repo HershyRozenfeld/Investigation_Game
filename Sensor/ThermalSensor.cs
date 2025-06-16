@@ -6,7 +6,11 @@ using System.Threading.Tasks;
 
 namespace Investigation_Game
 {
-    internal class ThermalSensor
+    internal class ThermalSensor : Sensor
     {
+        public ThermalSensor()
+        {
+            Name = "ThermalSensor";
+        }
     }
 }

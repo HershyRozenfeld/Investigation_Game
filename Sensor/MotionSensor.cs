@@ -6,7 +6,11 @@ using System.Threading.Tasks;
 
 namespace Investigation_Game
 {
-    internal class MotionSensor
+    internal class MotionSensor : Sensor
     {
+        public MotionSensor()
+        {
+            Name = "MotionSensor";
+        }
     }
 }
