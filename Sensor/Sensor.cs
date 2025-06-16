@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 
 namespace Investigation_Game
 {
-    internal class JuniorAgent
+    public class Sensor
     {
+    
     }
+
 }
