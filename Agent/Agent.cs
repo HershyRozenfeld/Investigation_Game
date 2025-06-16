@@ -17,9 +17,8 @@ namespace Investigation_Game
 
         public Dictionary<Sensor, int> InvestigationAttempt = new Dictionary<Sensor, int>();
 
-        public Agent(string name, Sensor[] weaknesses, string rank = "JuniorAgent") // כרגע בדרך הטיפשה עם מערך של חולשות
-        {                                                                
-            Name = name;
+        public Agent(Sensor[] weaknesses, string rank = "JuniorAgent") // כרגע בדרך הטיפשה עם מערך של חולשות
+        {
             Rank = rank;
             RndOfWeakness = new Sensor[weaknesses.Length];
             RndOfWeakness = weaknesses;
