@@ -18,32 +18,33 @@ namespace Investigation_Game
 
         public Dictionary<string, int> InvestigationAttempt = new Dictionary<string, int>();
 
-        public Agent(string[] weaknesses, string rank = "JuniorAgent") // כרגע בדרך הטיפשה עם מערך של חולשות
+        public Agent(string[] weaknesses) // כרגע בדרך הטיפשה עם מערך של חולשות
         {
-            Rank = rank;
             RndOfWeakness = new string[weaknesses.Length];
             RndOfWeakness = weaknesses;
-            switch (rank.ToLower())
+        }
+        public void GetNumOfWeaknesses()
+        {
+            switch (Name)
             {
-                case "junioragent":
+                case "JuniorAgent":
                     NumOfWeaknesses = 2;
                     break;
-                case "senioragent":
+                case "SeniorAgent":
                     NumOfWeaknesses = 4;
                     break;
-                case "squadleader":
+                case "SquadLeader":
                     NumOfWeaknesses = 6;
                     break;
-                case "companycommander":
+                case "CompanyCommander":
                     NumOfWeaknesses = 8;
                     break;
                 default:
                     NumOfWeaknesses = 2;
                     break;
             }
-            SetRandomWeakness();
         }
-        public void SetRandomWeakness()
+        public void GetRandomWeakness()
         {
             Random rnd = new Random();
             Weaknesses = new string[NumOfWeaknesses];
