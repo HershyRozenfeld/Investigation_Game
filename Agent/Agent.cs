@@ -13,6 +13,7 @@ namespace Investigation_Game
         public int NumOfWeaknesses { get; set; }
         public string[] Weaknesses { get; protected set; }
         public string[] RndOfWeakness { get; set; }
+
         public Dictionary<string, int> DictOfWeaknesses = new Dictionary<string, int>();
 
         public Dictionary<string, int> InvestigationAttempt = new Dictionary<string, int>();
