@@ -6,7 +6,11 @@ using System.Threading.Tasks;
 
 namespace Investigation_Game
 {
-    internal class SeniorAgent
+    internal class SeniorAgent : Agent
     {
+        public SeniorAgent(string[] weaknesses) : base(weaknesses)
+        {
+            Name = "SeniorAgent";
+        }
     }
 }

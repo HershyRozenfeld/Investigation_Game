@@ -11,17 +11,17 @@ namespace Investigation_Game
         public string Name { get; set; }
         public string Rank { get; set; }
         public int NumOfWeaknesses { get; set; }
-        public Sensor[] Weaknesses { get; protected set; }
-        public Sensor[] RndOfWeakness { get; set; }
-        public Dictionary<Sensor, int> DictOfWeaknesses = new Dictionary<Sensor, int>();
+        public string[] Weaknesses { get; protected set; }
+        public string[] RndOfWeakness { get; set; }
 
-        public Dictionary<Sensor, int> InvestigationAttempt = new Dictionary<Sensor, int>();
+        public Dictionary<string, int> DictOfWeaknesses = new Dictionary<string, int>();
 
-        public Agent(string name, Sensor[] weaknesses, string rank = "JuniorAgent") // כרגע בדרך הטיפשה עם מערך של חולשות
-        {                                                                
-            Name = name;
+        public Dictionary<string, int> InvestigationAttempt = new Dictionary<string, int>();
+
+        public Agent(string[] weaknesses, string rank = "JuniorAgent") // כרגע בדרך הטיפשה עם מערך של חולשות
+        {
             Rank = rank;
-            RndOfWeakness = new Sensor[weaknesses.Length];
+            RndOfWeakness = new string[weaknesses.Length];
             RndOfWeakness = weaknesses;
             switch (rank.ToLower())
             {
@@ -46,13 +46,13 @@ namespace Investigation_Game
         public void SetRandomWeakness()
         {
             Random rnd = new Random();
-            Weaknesses = new Sensor[NumOfWeaknesses];
+            Weaknesses = new string[NumOfWeaknesses];
             for (int i = 0; i < NumOfWeaknesses; i++)
             {
                 Weaknesses[i] = RndOfWeakness[rnd.Next(RndOfWeakness.Length)];
             }
         }
-        public void Investigation(Sensor sensor) // מקבל סנסור בודד, ומצפה שאת הלוגיקה של כמה סנסורים להכניס עבור כל סוכן למערכת הניהול
+        public void Investigation(string sensor) // מקבל סנסור בודד, ומצפה שאת הלוגיקה של כמה סנסורים להכניס עבור כל סוכן למערכת הניהול
         {
             if (!InvestigationAttempt.ContainsKey(sensor))
             {

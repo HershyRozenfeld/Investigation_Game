@@ -6,7 +6,11 @@ using System.Threading.Tasks;
 
 namespace Investigation_Game
 {
-    internal class CellularSensor
+    internal class CellularSensor : Sensor
     {
+        public CellularSensor()
+        {
+            Name = "CellularSensor";
+        }
     }
 }
