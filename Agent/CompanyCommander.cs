@@ -11,6 +11,9 @@ namespace Investigation_Game
         public CompanyCommander(string[] weaknesses) : base(weaknesses)
         {
             Name = "CompanyCommander";
+            GetNumOfWeaknesses();
+            GetRandomWeakness();
+            ArrToDictionary();
         }
     }
 }

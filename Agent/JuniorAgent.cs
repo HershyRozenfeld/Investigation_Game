@@ -11,6 +11,9 @@ namespace Investigation_Game
         public JuniorAgent(string[] weaknesses) : base(weaknesses)
         {
             Name = "JuniorAgent";
+            GetNumOfWeaknesses();
+            GetRandomWeakness();
+            ArrToDictionary();
         }
     }
 }
