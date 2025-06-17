@@ -79,24 +79,12 @@ namespace Investigation_Game
         public void StartInvestigation()
         {
             Console.WriteLine("Select an agent by entering the corresponding number:");
-            PrintAllAgents();
-            int agentId = GetAgentSelection();
-            while (!InvestigateAgent(Agents[agentId])) { }
-            Console.WriteLine("Investigation complete! All weaknesses found.");
-        }
-
-        private int GetAgentSelection()
-        {
-            int agentId;
-            while (true)
+            foreach (Agent a in Agents)
             {
-                Console.Write("Enter agent number: ");
-                if (int.TryParse(Console.ReadLine(), out agentId) && agentId > 0 && agentId <= Agents.Count)
-                {
-                    return agentId - 1;
-                }
-                Console.WriteLine("Invalid input. Please enter a valid agent number.");
+                PrintAllAgents();
+                while (!InvestigateAgent(a)) { }
             }
+            Console.WriteLine("Investigation complete! All weaknesses found.");
         }
 
         private int GetSensorSelection()
