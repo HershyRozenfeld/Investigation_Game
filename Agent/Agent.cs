@@ -53,7 +53,7 @@ namespace Investigation_Game
                 Weaknesses[i] = RndOfWeakness[rnd.Next(RndOfWeakness.Length)];
             }
         }
-        public void Investigation(string sensor) // מקבל סנסור בודד, ומצפה שאת הלוגיקה של כמה סנסורים להכניס עבור כל סוכן למערכת הניהול
+        public void Investigation(string sensor)
         {
             if (!InvestigationAttempt.ContainsKey(sensor))
             {
@@ -77,6 +77,21 @@ namespace Investigation_Game
                     DictOfWeaknesses[Weaknesses[i]] = 1;
                 }
             }
+        }
+        public bool CompareWeaknessDictionaries()
+        {
+            if (DictOfWeaknesses.Count != InvestigationAttempt.Count)
+            {
+                return false;
+            }
+            foreach (var w in DictOfWeaknesses)
+            {
+                if (!InvestigationAttempt.TryGetValue(w.Key, out int value) || w.Value != value)
+                {
+                    return false;
+                }
+            }
+            return true;
         }
     }
 }
