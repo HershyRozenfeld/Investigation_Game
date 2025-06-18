@@ -23,27 +23,6 @@ namespace Investigation_Game
             RndOfWeakness = new string[weaknesses.Length];
             RndOfWeakness = weaknesses;
         }
-        public void GetNumOfWeaknesses()
-        {
-            switch (Name)
-            {
-                case "JuniorAgent":
-                    NumOfWeaknesses = 2;
-                    break;
-                case "SeniorAgent":
-                    NumOfWeaknesses = 4;
-                    break;
-                case "SquadLeader":
-                    NumOfWeaknesses = 6;
-                    break;
-                case "CompanyCommander":
-                    NumOfWeaknesses = 8;
-                    break;
-                default:
-                    NumOfWeaknesses = 2;
-                    break;
-            }
-        }
         public void GetRandomWeakness()
         {
             Random rnd = new Random();
