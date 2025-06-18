@@ -79,20 +79,32 @@ namespace Investigation_Game
         public void StartInvestigation()
         {
             Console.WriteLine("Select an agent by entering the corresponding number:");
-            foreach (Agent a in Agents)
+            while (0 < Agents.Count)// עד שכל הסוכנים הוצמדו
             {
+                bool flag = false;
                 PrintAllAgents();
-                while (!InvestigateAgent(a)) { }
+                while (!flag)// עד שחלה הצלחה על סוכן ספציפי
+                {
+                    if (!InvestigateAgent(Agents[0]))// עד שהחקירה הראשונה הצליחה
+                    {
+                        while (!flag)
+                        {
+                            OverwriteDictionaryValue(Agents[0]);
+                            flag = Agents[0].CompareWeaknessDictionaries();
+                        }
+                    }
+                    RemoveAgent(Agents[0]);
+                }
             }
-            Console.WriteLine("Investigation complete! All weaknesses found.");
+            Console.WriteLine("Investigation complete! All weaknesses found. GAME OVER!");
         }
 
-        private int GetSensorSelection()
+        private int GetSensorSelection(string prompt)
         {
             int sensorId;
             while (true)
             {
-                Console.Write("Enter sensor number: ");
+                Console.Write(prompt);
                 if (int.TryParse(Console.ReadLine(), out sensorId) && sensorId > 0 && sensorId <= AllSensors.Count)
                 {
                     return sensorId - 1;
@@ -103,7 +115,7 @@ namespace Investigation_Game
 
         private bool InvestigateAgent(Agent agent)
         {
-            agent.InvestigationAttempt.Clear();
+            //agent.InvestigationAttempt.Clear();
             int count = 0;
             for (int i = 0; i < agent.NumOfWeaknesses; i++)
             {
@@ -111,7 +123,7 @@ namespace Investigation_Game
                 PrintAgent(agent); // לצורך בדיקה בלבד
                 Console.WriteLine("Select a sensor to use by entering the corresponding number:");
                 PrintAllSensors();
-                int sensorId = GetSensorSelection();
+                int sensorId = GetSensorSelection("Enter sensor number: ");
                 bool flag = AllSensors[sensorId].Activate(agent);
                 Console.WriteLine(flag ? "BOOM! Success." : "Failure.");
                 if (flag)
@@ -126,8 +138,63 @@ namespace Investigation_Game
                 Console.WriteLine("Not all weaknesses were found. Retrying investigation...\n");
                 return false;
             }
-            RemoveAgent(agent);
             return true;
+        }
+
+        private int SelectIndexFromList(List<string> items, string prompt)
+        {
+            int selectedIndex = -1;
+            while (true)
+            {
+                Console.Write(prompt);
+                if (int.TryParse(Console.ReadLine(), out selectedIndex) && selectedIndex > 0 && selectedIndex <= items.Count)
+                {
+                    return selectedIndex - 1;
+                }
+                Console.WriteLine("Invalid input. Please enter a valid index.");
+            }
+        }
+
+        private List<string> PrintDictionaryEntries(Dictionary<string, int> dict)
+        {
+            var keys = new List<string>();
+            int index = 1;
+            foreach (var kvp in dict)
+            {
+                Console.WriteLine($"{index}. {kvp.Key}: {kvp.Value}");
+                keys.Add(kvp.Key);
+                index++;
+            }
+            return keys;
+        }
+
+        private void OverwriteDictionaryValue(Agent agent)
+        {
+            var dict = agent.InvestigationAttempt;
+            if (dict.Count == 0)
+            {
+                Console.WriteLine("No entries in the dictionary to overwrite.");
+                return;
+            }
+
+            var keys = PrintDictionaryEntries(dict);
+            int oldKeyIndex = SelectIndexFromList(keys, "Enter the index of the key you want to overwrite: ");
+            string oldKey = keys[oldKeyIndex];
+
+            PrintAllSensors();
+            int newKeyIndex = GetSensorSelection("Enter sensor number for the new key: ");
+
+            if (dict[oldKey] > 1)
+            {
+                dict[oldKey]--;
+            }
+            else
+            {
+                dict.Remove(oldKey);
+            }
+
+            agent.Investigation(AllSensors[newKeyIndex].Name);
+            Console.WriteLine($"Entry updated: {oldKey} -> {AllSensors[newKeyIndex].Name}: {dict[AllSensors[newKeyIndex].Name]}");
         }
     }
 }
