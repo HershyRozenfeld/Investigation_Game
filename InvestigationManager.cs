@@ -24,6 +24,10 @@ namespace Investigation_Game
             Console.WriteLine("║ • If an agent has 2 weaknesses of the same type,              ║");
             Console.WriteLine("║   you must select that sensor twice                           ║");
             Console.WriteLine("║ • Only after discovering all weaknesses you move to next      ║");
+            Console.WriteLine("║ • If you fail to discover all weaknesses of a Senior Agent    ║");
+            Console.WriteLine("║   after 3 attempts, the agent will counter-attack!            ║");
+            Console.WriteLine("║ • You will be sent back to investigate a Junior Agent again   ║");
+            Console.WriteLine("║   before you can continue.                                    ║");
             Console.WriteLine("╚═══════════════════════════════════════════════════════════════╝");
             Console.WriteLine();
         }
@@ -56,15 +60,16 @@ namespace Investigation_Game
             Console.WriteLine($"│ Rank: {agent.Name,-30}                                  ");
             Console.WriteLine($"│ Number of weaknesses: {agent.NumOfWeaknesses,-10}                ");
 
-            if (agent.Weaknesses != null && agent.Weaknesses.Length > 0)
-            {
-                Console.WriteLine("│ Hidden weaknesses (for testing only):                   ");
-                var weaknessGroups = agent.Weaknesses.GroupBy(w => w).ToDictionary(g => g.Key, g => g.Count());
-                foreach (var weakness in weaknessGroups)
-                {
-                    Console.WriteLine($"│   {weakness.Key}: {weakness.Value} times                          ");
-                }
-            }
+            //מאפשר לראות את החולשות שהוגרלו באופן רנדומלי
+            //if (agent.Weaknesses != null && agent.Weaknesses.Length > 0)
+            //{
+            //    Console.WriteLine("│ Hidden weaknesses (for testing only):                   ");
+            //    var weaknessGroups = agent.Weaknesses.GroupBy(w => w).ToDictionary(g => g.Key, g => g.Count());
+            //    foreach (var weakness in weaknessGroups)
+            //    {
+            //        Console.WriteLine($"│   {weakness.Key}: {weakness.Value} times                          ");
+            //    }
+            //}
 
             if (agent.InvestigationAttempt.Count > 0)
             {
@@ -128,9 +133,20 @@ namespace Investigation_Game
                 currentAgent.InvestigationAttempt.Clear();
                 bool agentCompleted = false;
                 bool needsNewInvestigation = true;
-
+                int counter = 0;
                 while (!agentCompleted)
                 {
+                    counter++;
+                    if (counter == 3 && currentAgent.Name != "JuniorAgent")
+                    {
+                        if (currentAgent is SeniorAgent senior)
+                        {
+                            Agent junior = senior.CounterAttack();
+                            Agents.Insert(0, junior);
+                            ReturnToPreviousStage();
+                            return;
+                        }
+                    }
                     PrintAgent(currentAgent);
 
                     if (needsNewInvestigation)
@@ -174,7 +190,11 @@ namespace Investigation_Game
             Console.WriteLine("🏆🎊 Congratulations! You completed the investigation successfully! All weaknesses were discovered! 🎊🏆");
             Console.WriteLine("Game over!");
         }
-
+        private void ReturnToPreviousStage()
+        {
+            Console.WriteLine("🚨 Counter-attack! You failed to discover the weaknesses. Returning to the Junior Agent for another try. 🚨\n");
+            StartInvestigation();
+        }
         private int GetSensorSelection(string prompt)
         {
             int sensorId;
