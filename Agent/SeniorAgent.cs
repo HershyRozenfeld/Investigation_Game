@@ -15,5 +15,11 @@ namespace Investigation_Game
             GetRandomWeakness();
             ArrToDictionary();
         }
+        public Agent CounterAttack()
+        {
+            Agent agent = new JuniorAgent(Weaknesses);
+            return agent;
+        }
+
     }
 }

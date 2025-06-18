@@ -15,18 +15,15 @@ namespace Investigation_Game
 
         public bool Activate(Agent agent)
         {
-            int value;
-            if (agent.DictOfWeaknesses.ContainsKey(Name))
+            if (!agent.DictOfWeaknesses.ContainsKey(Name))
             {
-                value = agent.DictOfWeaknesses[Name];
-                if (!agent.InvestigationAttempt.ContainsKey(Name))
-                {
-                    return true;
-                }
-                else if (agent.InvestigationAttempt[Name] == value - 1)
-                {
-                    return true;
-                }
+                return false;
+            }
+            int requiredActivations = agent.DictOfWeaknesses[Name];
+            int currentActivations = agent.InvestigationAttempt.ContainsKey(Name) ? agent.InvestigationAttempt[Name] : 0;
+            if (currentActivations < requiredActivations)
+            {
+                return true;
             }
             return false;
         }

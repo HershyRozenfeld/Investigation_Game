@@ -66,6 +66,7 @@ namespace Investigation_Game
         }
         public void ArrToDictionary()
         {
+            DictOfWeaknesses.Clear();
             for (int i = 0; i < NumOfWeaknesses; i++)
             {
                 if (DictOfWeaknesses.ContainsKey(Weaknesses[i]))
@@ -80,7 +81,8 @@ namespace Investigation_Game
         }
         public bool CompareWeaknessDictionaries()
         {
-            if (DictOfWeaknesses.Count != InvestigationAttempt.Count)
+            int totalAttempts = InvestigationAttempt.Values.Sum();
+            if (totalAttempts != NumOfWeaknesses)
             {
                 return false;
             }
@@ -92,6 +94,14 @@ namespace Investigation_Game
                 }
             }
             return true;
+        }
+        public void PrintWeaknesses()
+        {
+            Console.WriteLine($"Weaknesses of {Name}:");
+            foreach (var weakness in DictOfWeaknesses)
+            {
+                Console.WriteLine($"  {weakness.Key}: {weakness.Value} times");
+            }
         }
     }
 }
