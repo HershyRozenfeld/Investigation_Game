@@ -19,7 +19,6 @@ namespace Investigation_Game
             if (agent.DictOfWeaknesses.ContainsKey(Name))
             {
                 value = agent.DictOfWeaknesses[Name];
-                Console.WriteLine(value+"@"+ Name);
                 if (!agent.InvestigationAttempt.ContainsKey(Name))
                 {
                     return true;
@@ -31,8 +30,5 @@ namespace Investigation_Game
             }
             return false;
         }
-
-
     }
-
 }
