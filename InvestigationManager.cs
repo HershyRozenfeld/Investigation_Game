@@ -57,7 +57,7 @@ namespace Investigation_Game
             Console.WriteLine("┌──────────────────────────────────────────────────────────");
             Console.WriteLine($"│                Agent Details: {agent.Name,-20}           ");
             Console.WriteLine("├──────────────────────────────────────────────────────────");
-            Console.WriteLine($"│ Rank: {agent.Name,-30}                                  ");
+            Console.WriteLine($"│ Rank: {agent.Rank,-30}                                  ");
             Console.WriteLine($"│ Number of weaknesses: {agent.NumOfWeaknesses,-10}                ");
 
             //מאפשר לראות את החולשות שהוגרלו באופן רנדומלי
