@@ -11,6 +11,7 @@ namespace Investigation_Game
         public SquadLeader(string[] weaknesses) : base(weaknesses)
         {
             Name = "SquadLeader";
+            Rank = "Squad Leader";
             NumOfWeaknesses = 6;
             GetRandomWeakness();
             ArrToDictionary();
